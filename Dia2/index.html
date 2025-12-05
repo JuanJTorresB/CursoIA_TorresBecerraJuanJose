@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TaskList — Minimal</title>
+  <link rel="stylesheet" href="./style/style.css">
+  <!-- Tailwind Play CDN for quick prototyping -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Tiny custom styles to complement Tailwind */
+    .task-enter { transform: translateY(-6px); opacity: 0; }
+    .task-enter-active { transform: translateY(0); opacity: 1; transition: all 180ms ease; }
+    .line-through-fade { text-decoration: line-through; opacity: .6; }
+    /* custom checkbox look */
+    input[type="checkbox"].styled:checked + label { color: #94a3b8; }
+  </style>
+</head>
+<body class="antialiased bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+  <header class="fixed top-0 left-0 right-0 backdrop-blur bg-white/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 z-30">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-xl font-semibold">TaskList</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pt-28 pb-20">
+    <!-- Hero -->
+    <section class="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold">Organiza tu día con claridad</h1>
+        <p class="mt-2 text-slate-600 dark:text-slate-400">Un gestor simple, funcional y construido desde cero para mostrar mis habilidades técnicas.</p>
+        <div class="mt-4 flex gap-3">
+          <button id="addSample" class="px-4 py-2 rounded-md bg-sky-600 text-white font-semibold">Agregar tarea</button>
+          <button id="clearAll" class="px-4 py-2 rounded-md bg-transparent border border-slate-200 dark:border-slate-700">Eliminar todas</button>
+        </div>
+      </div>
+      <div class="">
+        <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg p-3 shadow-sm">
+          <label for="newTask" class="sr-only">Nueva tarea</label>
+          <div class="flex gap-2">
+            <input id="newTask" placeholder="¿Qué vas a hacer hoy?" class="flex-1 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-500" />
+            <button id="btnAdd" class="px-3 py-2 bg-sky-600 text-white rounded-md font-medium">Añadir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="mb-4 flex items-center gap-3">
+      <div class="flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1">
+        <button class="filterBtn text-sm px-2 py-1 rounded-full" data-filter="all">Todas</button>
+        <button class="filterBtn text-sm px-2 py-1 rounded-full" data-filter="active">Pendientes</button>
+        <button class="filterBtn text-sm px-2 py-1 rounded-full" data-filter="completed">Completadas</button>
+      </div>
+    </section>
+
+    <!-- Tasks container -->
+    <section id="tasksRoot" class="space-y-3">
+      <!-- JS will inject task items here -->
+    </section>
+
+    <!-- Collapsible completed area -->
+    <section class="mt-6">
+      <button id="toggleCompleted" class="w-full text-left bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-md px-4 py-2 flex items-center justify-between">
+        <span class="font-medium">Completadas</span>
+        <span id="completedCount" class="text-sm text-slate-500 dark:text-slate-400">0</span>
+      </button>
+      <div id="completedList" class="mt-3 hidden space-y-2"></div>
+    </section>
+  </main>
+
+  <!-- Floating action for mobile -->
+  <div class="fixed inset-x-4 bottom-6 sm:hidden">
+    <div class="flex justify-end">
+      <button id="fab" class="px-4 py-3 rounded-full bg-sky-600 text-white shadow-lg">+</button>
+    </div>
+  </div>
+</body>
+<script src="./script/script.js"></script>
+</html>
